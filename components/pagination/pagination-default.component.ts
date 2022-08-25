@@ -70,6 +70,7 @@ import { PaginationItemRenderContext } from './pagination.types';
           [pageIndex]="pageIndex"
           [pageSize]="pageSize"
           [pageSizeOptions]="pageSizeOptions"
+          [showAllLabel]="showAllLabel"
           (pageIndexChange)="onPageIndexChange($event)"
           (pageSizeChange)="onPageSizeChange($event)"
         ></li>
@@ -90,6 +91,7 @@ export class NzPaginationDefaultComponent implements OnChanges, OnDestroy, OnIni
   @Input() pageIndex = 1;
   @Input() pageSize = 10;
   @Input() pageSizeOptions: number[] = [10, 20, 30, 40];
+  @Input() showAllLabel = false;
   @Output() readonly pageIndexChange = new EventEmitter<number>();
   @Output() readonly pageSizeChange = new EventEmitter<number>();
   ranges = [0, 0];

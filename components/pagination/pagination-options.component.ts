@@ -55,6 +55,7 @@ export class NzPaginationOptionsComponent implements OnChanges {
   @Input() pageIndex = 1;
   @Input() pageSize = 10;
   @Input() pageSizeOptions: number[] = [];
+  @Input() showAllLabel = false;
   @Output() readonly pageIndexChange = new EventEmitter<number>();
   @Output() readonly pageSizeChange = new EventEmitter<number>();
   listOfPageSizeOption: Array<{ value: number; label: string }> = [];
@@ -85,6 +86,9 @@ export class NzPaginationOptionsComponent implements OnChanges {
         value: item,
         label: `${item} ${this.locale.items_per_page}`
       }));
+    }
+    if (this.total != pageSize.currentValue && this.showAllLabel == true) {
+      this.listOfPageSizeOption.push({ value: -1, label: 'Show All' });
     }
   }
 }

@@ -67,6 +67,7 @@ const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'pagination';
       [pageIndex]="nzPageIndex"
       [pageSize]="nzPageSize"
       [pageSizeOptions]="nzPageSizeOptions"
+      [showAllLabel]="nzShowAllLabel"
       (pageIndexChange)="onPageIndexChange($event)"
       (pageSizeChange)="onPageSizeChange($event)"
     ></nz-pagination-default>
@@ -101,6 +102,7 @@ export class NzPaginationComponent implements OnInit, OnDestroy, OnChanges {
   @Input() @WithConfig() @InputBoolean() nzShowSizeChanger = false;
   @Input() @WithConfig() @InputBoolean() nzShowQuickJumper = false;
   @Input() @WithConfig() @InputBoolean() nzSimple = false;
+  @Input() @WithConfig() @InputBoolean() nzShowAllLabel = false;
   @Input() @InputBoolean() nzDisabled = false;
   @Input() @InputBoolean() nzResponsive = false;
   @Input() @InputBoolean() nzHideOnSinglePage = false;
@@ -136,7 +138,7 @@ export class NzPaginationComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onPageSizeChange(size: number): void {
-    this.nzPageSize = size;
+    this.nzPageSize = size == -1 ? this.nzTotal : size;
     this.nzPageSizeChange.emit(size);
     const lastIndex = this.getLastIndex(this.nzTotal, this.nzPageSize);
     if (this.nzPageIndex > lastIndex) {
